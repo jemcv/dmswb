@@ -15,11 +15,11 @@ if (isset($_POST['upload'])) {
     $fileExt = explode('.', $fileName);
     $fileActExt = strtolower(end($fileExt));
 
-    $allowed = array('pdf', 'docx', 'jpg', 'png', 'jpeg', 'txt');
+    // $allowed = array(); allow all files in_array($allowed)
 
-    if (in_array($fileActExt, $allowed)) {
+    if ($fileActExt) {
         if ($fileError === 0) {
-            if ($fileSize < 1000000) {
+            if ($fileSize < 10000000) {
                 $fileNameNew = uniqid('', true).".".$fileActExt;
                 $fileDest = 'uploads/'.$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDest);
@@ -82,19 +82,12 @@ if (isset($_POST['upload'])) {
                     }
                 } 
 
-
-
-               
-
             } else {
                 echo "Large file";
             }
         } else {
             echo "Error uploading file";
         }
-    } else {
-        echo '<script>alert("You cannot upload this file type")</script>'; 
-        header("Refresh=1; url=index.php");
     }
 }
 ?>
