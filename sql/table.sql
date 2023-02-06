@@ -2,7 +2,7 @@ CREATE TABLE `assignment` (
     `ass_id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `topic_name` varchar(100) NOT NULL,
     `file_data` longblob NOT NULL,
-.   `date_posted` date NOT NULL,
+    `date_posted` date NOT NULL,
     `uploaded_by` varchar(100) NOT NULL DEFAULT 'Anonymous'
 )
 
