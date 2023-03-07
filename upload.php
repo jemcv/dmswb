@@ -23,7 +23,6 @@ if (isset($_POST['upload'])) {
                 $fileNameNew = uniqid('', true).".".$fileActExt;
                 $fileDest = 'uploads/'.$fileNameNew;
                 move_uploaded_file($fileTmpName, $fileDest);
-                //header("Location: upload.php?uploadsuccess");
 
                 if ($upload_type == 'ass') {
                     $sql = "INSERT INTO `assignment` (topic_name, file_data, date_posted, uploaded_by) 
