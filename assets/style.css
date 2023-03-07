@@ -25,10 +25,7 @@
 }
 
 body {
-    background-image: url("bg.jpg");
     color: var(--base8);
-    background-size: cover;
-    background-repeat: no-repeat;
 }
 
 h1 {
@@ -54,6 +51,21 @@ li {
 th, td {
     padding: 8px;
 }
+
+p.blank {
+    text-align: center;
+    margin: 25%;
+}
+
+#bgvideo {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index: -1 !important;
+}
+
 div.container {
     display: flex;
     justify-content: space-between;
