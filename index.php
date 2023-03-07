@@ -6,11 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/style.css">
     <title>[ Home ]</title>
-
 </head>
 <body>
     <div id="lines"></div>
-    
+    <video autoplay muted loop id="bgvideo">
+        <source src="assets/deku.mp4">
+    </video>
     <div class="container">
         <div class="main">
                 <div class="pic">
@@ -84,15 +85,7 @@
         <div class="hidden">
             <div id="ass-content">
                 <table class="table-auto">
-                    <caption><h3>Assignments</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Date Posted</th>
-                            <th scope="col">Uploaded by</th>
-                            <th scope="col">Action</th>
-                        </tr>
                         <?php 
                         session_start();
 
@@ -100,17 +93,30 @@
                         
                         $sql = "SELECT * FROM assignment";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['ass_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/assignment.php?id=$res[ass_id]\">  </a>/ <a href=\"archive.php?ass_id=$res[ass_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Assignments</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Date Posted</th>" ;
+                          echo "<th scope=\"col\">Uploaded by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['ass_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/assignment.php?id=$res[ass_id]\">  </a>/ <a href=\"archive.php?ass_id=$res[ass_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No assignment</p>";
                         }
+                       
                     ?>
                     </thead>
                 </table>
@@ -118,28 +124,32 @@
 
             <div id="quiz-content">
                 <table class="table-auto">
-                    <caption><h3>Quizzes</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Date Posted</th>
-                            <th scope="col">Uploaded by</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        <?php 
+                    <?php 
                         $sql = "SELECT * FROM quiz";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['quiz_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/quiz.php?id=$res[quiz_id]\">  </a>/ <a href=\"archive.php?quiz_id=$res[quiz_id]\" onClick=\"return confirm('Are you sure you want to delete?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Quizzes</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Date Posted</th>" ;
+                          echo "<th scope=\"col\">Uploaded by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['quiz_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/quiz.php?id=$res[quiz_id]\">  </a>/ <a href=\"archive.php?quiz_id=$res[quiz_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No Quiz</p>";
                         }
                     ?>
                     </thead>
@@ -148,28 +158,32 @@
 
             <div id="lab-content">
                 <table class="table-auto">
-                    <caption><h3>Laboratories</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Date Posted</th>
-                            <th scope="col">Uploaded by</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        <?php 
+                    <?php 
                         $sql = "SELECT * FROM lab";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['lab_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/lab.php?id=$res[lab_id]\">  </a>/ <a href=\"archive.php?lab_id=$res[lab_id]\" onClick=\"return confirm('Are you sure you want to delete?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Laboratories</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Date Posted</th>" ;
+                          echo "<th scope=\"col\">Uploaded by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['lab_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/lab.php?id=$res[lab_id]\">  </a>/ <a href=\"archive.php?lab_id=$res[lab_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No Lab</p>";
                         }
                     ?>
                     </thead>
@@ -178,28 +192,32 @@
             
             <div id="exam-content">
                 <table class="table-auto">
-                    <caption><h3>Exams</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Date Posted</th>
-                            <th scope="col">Uploaded by</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        <?php 
+                    <?php 
                         $sql = "SELECT * FROM exam";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['exam_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/exam.php?id=$res[exam_id]\">  </a>/ <a href=\"archive.php?exam_id=$res[exam_id]\" onClick=\"return confirm('Are you sure you want to delete?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Exams</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Date Posted</th>" ;
+                          echo "<th scope=\"col\">Uploaded by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['exam_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/exam.php?id=$res[exam_id]\">  </a>/ <a href=\"archive.php?exam_id=$res[exam_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No Exam</p>";
                         }
                     ?>
                         </thead>
@@ -208,28 +226,32 @@
 
             <div id="proj-content">
                 <table class="table-auto">
-                    <caption><h3>Projects</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Date Posted</th>
-                            <th scope="col">Uploaded by</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        <?php 
+                    <?php 
                         $sql = "SELECT * FROM proj";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['proj_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/project.php?id=$res[proj_id]\">  </a>/ <a href=\"archive.php?proj_id=$res[proj_id]\" onClick=\"return confirm('Are you sure you want to delete?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Projects</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Date Posted</th>" ;
+                          echo "<th scope=\"col\">Uploaded by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['proj_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"./edit/project.php?id=$res[proj_id]\">  </a>/ <a href=\"archive.php?proj_id=$res[proj_id]\" onClick=\"return confirm('Are you sure you want to archive it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No Project</p>";
                         }
                     ?>
                         </thead>
@@ -238,28 +260,32 @@
 
             <div id="archive-content">
                 <table class="table-auto">
-                    <caption><h3>Archive</h3></caption>
                     <thead>
-                        <tr>
-                            <th scope="col">Document No.</th>
-                            <th scope="col">Topic</th>
-                            <th scope="col">Archive Date</th>
-                            <th scope="col">Archive by</th>
-                            <th scope="col">Action</th>
-                        </tr>
-                        <?php 
+                    <?php 
                         $sql = "SELECT * FROM archive";
                         $query = mysqli_query($conn, $sql); 
-                        while($res = mysqli_fetch_array($query)) {
-                            echo"<tr>";
-                                echo"<td>".$res['archive_id']."</td>";
-                                echo"<td>".$res['topic_name']."</td>";
-                                echo"<td>".$res['date_posted']."</td>";
-                                echo"<td>".$res['uploaded_by']."</td>";
-                            echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"delete.php?archive_id=$res[archive_id]\" onClick=\"return confirm('Are you sure you want to delete?')\"> 󰆴</a>/ "; 
+                        if(mysqli_num_rows($query) > 0) {
+                        echo "<caption><h3>Archives</h3></caption>";
+                          echo "<tr>";
+                          echo "<th scope=\"col\">Document No.</th>";
+                          echo "<th scope=\"col\">Topic</th>" ;
+                          echo "<th scope=\"col\">Archive Date</th>" ;
+                          echo "<th scope=\"col\">Archive by</th>" ;
+                          echo "<th scope=\"col\">Action</th>";
+                          echo "</tr>";
+                            while($res = mysqli_fetch_array($query)) {
+                                echo"<tr>";
+                                    echo"<td>".$res['archive_id']."</td>";
+                                    echo"<td>".$res['topic_name']."</td>";
+                                    echo"<td>".$res['date_posted']."</td>";
+                                    echo"<td>".$res['uploaded_by']."</td>";
+                                echo "<td><a href=\"uploads/$res[file_data]\" target=\"_blank\">  </a>/ <a href=\"delete.php?archive_id=$res[archive_id]\" onClick=\"return confirm('Are you sure you want to delete it?')\"> 󰆴</a>/ "; 
+                                        
                                     
-                                
-                            echo"</tr>";
+                                echo"</tr>";
+                            }
+                        } else {
+                            echo "<p class=\"blank\">No Archive</p>";
                         }
                     ?>
                         </thead>
