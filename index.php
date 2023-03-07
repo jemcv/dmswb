@@ -25,9 +25,9 @@
                         [ <a id="files">Files</a> ]
                     </nav>
                     <br>
-                    <p>Student No: 2020101709</p>
-                    <p>Name: Jemuel Veroja</p>
-                    <p>Address: Muzon, San Jose Del Monte, Bulacan</p>
+                    <p>Student No: 0123456789</p>
+                    <p>Name: John Doe</p>
+                    <p>Address: Earth</p>
                     <p>Contact No: 0123456789</p>
                     <br>
                     <footer>
