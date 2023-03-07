@@ -24,6 +24,9 @@ while($res = mysqli_fetch_assoc($query)) {
 </head>
 <body>
     <div id="lines"></div>
+    <video autoplay muted loop id="bgvideo">
+        <source src="../assets/deku.mp4">
+    </video>
         <div class="container" style="justify-content: center">
             <div class="box">
             <header>
